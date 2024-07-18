@@ -1,22 +1,27 @@
 import { useState } from "react";
+import "../App.css";
 
-const Input = () => {
+const Input = ({ taskList, setTaskList }) => {
   const [input, setInput] = useState("");
 
   const handleAddTask = (e) => {
     e.preventDefault();
+    if (input.trim()) {
+      setTaskList((prevTaskList) => [...prevTaskList, input]);
+      setInput("");
+    }
   };
-  console.log(input);
+
   return (
     <>
-      <form>
+      <form onSubmit={handleAddTask}>
         <input
           type="text"
           placeholder="Add a task"
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
-        <button>Add</button>
+        <button type="submit">Add</button>
       </form>
     </>
   );
